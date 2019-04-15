@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,10 @@ public class ListNotesActivity extends AppCompatActivity {
         initToolbar();
 
         // TODO: 4/12/19 panggil initRecyclerView() disini
+        initRecyclerView();
 
         // TODO: 4/12/19 panggil initDummy() disini
+        initDummy();
     }
 
     /**
@@ -57,14 +60,13 @@ public class ListNotesActivity extends AppCompatActivity {
     public void initRecyclerView() {
         // TODO: 4/12/19 -> ganti null dengan component RecyclerView pada activity_list_notes
         // hint: gunakan findViewById(R.id.xxxxx);
-        mRecyclerView = null;
+        mRecyclerView = findViewById(R.id.rvListNotes);
 
         // TODO: 4/12/19 -> ganti null dengan objek ListNotesAdapter
-        mAdapter = null;
+        mAdapter = new ListNotesAdapter(mLists);
 
         // TODO: 4/12/19 -> ganti null dengan objek LinearLayoutManager
-        mLayoutManager = null;
-
+        mLayoutManager = new LinearLayoutManager(this); //kalo yang normal pake "this" aja
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -73,12 +75,19 @@ public class ListNotesActivity extends AppCompatActivity {
     /**
      * Method ini digunakan untuk membuat data dummy pada list
      */
+    //supaya datanya tampil, tapi dummy
     public void initDummy() {
         // TODO: 4/12/19 -> lengkapi parameter untuk ListNotesModel disini
         // hint: lakukan setelah menambahkan constructor pada ListNotesModel
         // untuk date gunakan Tools.getCurrentDateISO8601()
+        Tools.getCurrentDateISO8601();
 
-        mLists.add(new ListNotesModel());
+        mLists.add(new ListNotesModel("1","https://i.ibb.co/y8XHwYS/island.png", "Lost Paradise1",Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("2","https://i.ibb.co/y8XHwYS/island.png", "Lost Paradise2",Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("3","https://i.ibb.co/y8XHwYS/island.png", "Lost Paradise3",Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("4","https://i.ibb.co/y8XHwYS/island.png", "Lost Paradise4",Tools.getCurrentDateISO8601()));
+        mLists.add(new ListNotesModel("5","https://i.ibb.co/y8XHwYS/island.png", "Lost Paradise5",Tools.getCurrentDateISO8601()));
+        //pake Ctrl+D biar banyak
 
         mAdapter.notifyDataSetChanged();
     }

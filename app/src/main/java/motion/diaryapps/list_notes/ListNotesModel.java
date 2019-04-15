@@ -9,17 +9,28 @@ public class ListNotesModel {
 
     private String id;
     private String image_url;
+
     // TODO: 4/12/19 -> Buat Attribute title dan date disini
     // hint: untuk date gunakan tipe data string, lakukan seperti contoh diatas
+    private String title;
+    private String date;
 
     // TODO: 4/12/19 -> Buat Constructor disini
     // hint: Gunakan alt+insert
+
+    public ListNotesModel(String id, String image_url, String title, String date) {
+        this.id = id;
+        this.image_url = image_url;
+        this.title = title;
+        this.date = date;
+    }
 
 
     // TODO: 4/12/19 -> Buat Getter dan Setternya disini
     // hint: Gunakan alt+insert
 
     public String getId() {
+
         return id;
     }
 
@@ -35,5 +46,19 @@ public class ListNotesModel {
         this.image_url = image_url;
     }
 
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

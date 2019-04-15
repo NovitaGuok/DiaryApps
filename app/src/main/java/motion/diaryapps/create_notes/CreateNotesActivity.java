@@ -71,7 +71,7 @@ public class CreateNotesActivity extends AppCompatActivity {
         switch (type) {
             case TYPE_EDIT:
                 mTvToolbarTitle.setText("Edit Diary");
-                initData((DiaryDao) getIntent().getSerializableExtra(KEY_DATA));
+                initData((DiaryDao) getIntent().getSerializableExtra(KEY_DATA)); //ngambil data
                 mLlCreateNotesCover.setVisibility(View.GONE);
                 mRlCreateNotesCover.setVisibility(View.VISIBLE);
                 break;

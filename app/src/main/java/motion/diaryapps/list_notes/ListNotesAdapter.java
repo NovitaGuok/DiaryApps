@@ -21,12 +21,19 @@ import motion.diaryapps.utils.Tools;
 /**
  * Class ini digunakan sebagai Adapter dari recycler view
  */
+
+
 public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.ViewHolder> {
 
-    private List<ListNotesModel> mLists = new ArrayList<>();
-    private Context mContext;
+    private List<ListNotesModel> mLists = new ArrayList<>(); //list yang bakal diulang
+    private Context mContext; //menandai komponen
     // TODO: 4/12/19 -> Tambahkan Constructor disini
     // hint: gunakan alt+insert
+
+    public ListNotesAdapter(List<ListNotesModel> mLists) {
+        this.mLists = mLists;
+        this.mContext = mContext;
+    }
 
     /**
      * Method ini digunakan untuk membuat ViewHolder dari item yang akan diulang
@@ -40,10 +47,10 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
         mContext = viewGroup.getContext();
 
         // TODO: 4/12/19 -> ganti null dengan LayoutInflater.from(...).inflate(...)
-        View view = null;
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_list_notes,viewGroup,false);
 
         // TODO: 4/12/19 -> ganti null dengan Inisialisasi objek ViewHolder disini dengan memasukkan view yang telah dibuat
-        ViewHolder viewHolder = null;
+        ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
     }
@@ -55,19 +62,21 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
      * @param i position item
      */
     @Override
+    //buat ngisi viewholder
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final int position = i;
 
         // TODO: 4/12/19 -> set setiap component yang akan tampil sesuai dengan data pada mList
         // hint: untuk date gunakan Tools.getNormalDate(....)
-
+        viewHolder.tvItemListNotesDate.setText(mLists.get(position).getDate());
+        viewHolder.tvItemListNotesTitle.setText(mLists.get(position).getTitle());
         viewHolder.cvItemListNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // TODO: 4/12/19 -> ganti null dengan objek Intent baru ke DetailNotesActivity disini
                 // hint: gunakan mContext untuk mengisi parameter context
-                Intent intent = null;
+                Intent intent = new Intent(mContext,DetailNotesActivity.class);
 
                 mContext.startActivity(intent);
             }
@@ -84,7 +93,7 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
     public int getItemCount() {
         // TODO: 4/12/19 -> ganti return menjadi panjang list
         // hint : gunakan method xxxx.size()
-        return 0;
+        return mLists.size();
     }
 
     /**
@@ -99,12 +108,16 @@ public class ListNotesAdapter extends RecyclerView.Adapter<ListNotesAdapter.View
 
         // TODO: 4/12/19  -> buat attribute setiap component disini
         // hint: ikuti contoh diatas
+        TextView tvItemListNotesTitle;
+        TextView tvItemListNotesDate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             cvItemListNotes = itemView.findViewById(R.id.cvItemListNotes);
             ivItemListNotes = itemView.findViewById(R.id.ivItemListNotes);
+            tvItemListNotesDate = itemView.findViewById(R.id.tvItemListNotesDate);
+            tvItemListNotesTitle = itemView.findViewById(R.id.tvItemListNotesTitle);
 
             // TODO: 4/12/19 -> inisialisasi setiap attribute dengan idnya disini
             // hint: gunakan itemView.findViewById(R.id.xxxxx) seperti contoh diatas
